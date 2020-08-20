@@ -147,7 +147,7 @@ class Interface(object):
 
         else:
             self.int_area = float(xml_interface[3].text)
-            self.css = int(xml_interface[7].text)
+            self.css = float(xml_interface[7].text)
             hbonds = xml_interface[11]
             salts = xml_interface[12]
 
@@ -266,3 +266,9 @@ class PISA_Data(object):
             # log the interfacestatus
             errormsg = "Bad interface status | Exiting.. "
             print(errormsg)
+    
+    def __repr__(self):
+        return '{0} protein interfaces\n{1} protein interfaces'\
+            .format(len(self.protein_interfaces),len(self.ligand_interfaces))
+    
+    
