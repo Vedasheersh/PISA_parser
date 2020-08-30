@@ -210,7 +210,7 @@ except:
 try:
     import xml.etree.ElementTree as ET
 except:
-    print('xml library could not be imported. Exiting.. Bye!)
+    print('xml library could not be imported. Exiting.. Bye!')
     sys.exit(0)
 
 class PISA_Data(object):
