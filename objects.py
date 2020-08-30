@@ -220,7 +220,7 @@ class PISA_Data(object):
             wget.download(LINK.format(pdb_id),out='{0}.xml'.format(pdb_id))
         elif requests:
             url = LINK.format(pdb_id)
-            outf = '{0}.xml'.format(pdb_id))
+            outf = '{0}.xml'.format(pdb_id)
             r = requests.get(url)
             open(outf,'wb').write(r.content)
             
