@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import sys
+
 class Interaction(object):
     """docstring for Interaction"""
     def __init__(self, chain1=None, res1=None, atom1=None, chain2=None, \
@@ -196,13 +198,32 @@ class Interface(object):
         return 'Interface {0} with interface area {1}'\
             .format(self.id,self.int_area)
 
-import wget
-import xml.etree.ElementTree as ET
+try:
+    import wget
+except:
+    try:
+        import requests
+    except:
+        print('Neither wget nor requests library could be imported. Exiting.. Bye!')
+        sys.exit(0)
+    
+try:
+    import xml.etree.ElementTree as ET
+except:
+    print('xml library could not be imported. Exiting.. Bye!)
+    sys.exit(0)
 
 class PISA_Data(object):
     def __init__(self,pdb_id):
         LINK = 'http://www.ebi.ac.uk/pdbe/pisa/cgi-bin/interfaces.pisa?{0}'
-        wget.download(LINK.format(pdb_id),out='{0}.xml'.format(pdb_id))
+        if wget:
+            wget.download(LINK.format(pdb_id),out='{0}.xml'.format(pdb_id))
+        elif requests:
+            url = LINK.format(pdb_id)
+            outf = '{0}.xml'.format(pdb_id))
+            r = requests.get(url)
+            open(outf,'wb').write(r.content)
+            
         self.pdb_id = pdb_id
         tree = ET.parse('{0}.xml'.format(pdb_id))
 
